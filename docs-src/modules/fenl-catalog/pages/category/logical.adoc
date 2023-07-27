@@ -1,0 +1,26 @@
+= Logical Functions
+
+|===
+| Function | Summary
+
+| [coalesce](#coalesce)
+| Return first non-`null` value or `null` if all values are `null`.
+
+| [else](#else)
+| Return the `value` if it is non-`null`, `default` otherwise.
+
+| [if](#if)
+| Return the `value` if `condition` is `true`, `null` otherwise.
+
+| [logical_and](#logical_and)
+| Returns the logical conjunction (AND) of two booleans.
+
+| [logical_or](#logical_or)
+| Returns the logical disjunction (OR) of two booleans.
+
+| [not](#not)
+| Returns the logical negation of a boolean.
+
+| [null_if](#null_if)
+| Return the `value` if `condition` is `false`, `null` otherwise.
+|===

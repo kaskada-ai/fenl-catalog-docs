@@ -1,0 +1,59 @@
+= ceil
+
+<pre>ceil(n: <a href="https://docs.kaskada.com/docs/data-model#type-constraints">number</a>) -> number</pre>
+
+Rounds the number up to the next largest integer.
+
+See also [`round`](#round) and [`floor`](#floor).
+
+### Parameters
+* n: The number to round up.
+
+Note: This method may be applied to any numeric type. For anything other than
+`float32` and `float64` it has no affect since the values are already integers.
+
+### Results
+Returns a numeric column of the same type as `n`.
+The result contains `null` if `n` was null at that position.
+Otherwise, it contains the result of rounding `n` up to the next largest integer.
+
+**Tags:** [math](#math-functions)
+
+.Example: Ceil
+
+===== Query
+```
+Input.a | ceil()
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,a
+2021-01-01T00:00:00.000000000Z,A,5.7
+2021-01-01T00:00:00.000000000Z,A,6.3
+2021-01-02T00:00:00.000000000Z,B,
+2021-01-02T00:00:00.000000000Z,B,-2.3
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,a,result
+2021-01-01T00:00:00.000000000,A,5.7,6.0
+2021-01-01T00:00:00.000000000,A,6.3,7.0
+2021-01-02T00:00:00.000000000,B,,
+2021-01-02T00:00:00.000000000,B,-2.3,-2.0
+
+|===
+
+====
+

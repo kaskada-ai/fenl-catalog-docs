@@ -1,0 +1,233 @@
+# Functions
+
+|===
+| Function | Summary
+
+| [add](#add)
+| Returns the sum of two numbers.
+
+| [add_time](#add_time)
+| Adds a `timedelta` (duration or interval) to a time.
+
+| [ceil](#ceil)
+| Rounds the number up to the next largest integer.
+
+| [clamp](#clamp)
+| Returns `value` clamped between the bounds `min` and `max`.
+
+| [coalesce](#coalesce)
+| Return first non-`null` value or `null` if all values are `null`.
+
+| [count](#count)
+| Counts each new, non-`null` value in the input.
+
+| [count_if](#count_if)
+| Counts each `true` value across in input.
+
+| [daily](#daily)
+| A periodic function that produces a `true` value at the start of each calendar day (UTC).
+
+| [day_of_month](#day_of_month)
+| Return the day-of-month for the given time, starting with 1.
+
+| [day_of_month0](#day_of_month0)
+| Return the day-of-month for the given time, starting with 0.
+
+| [day_of_year](#day_of_year)
+| Return the day-of-year for the given time, starting with 1.
+
+| [day_of_year0](#day_of_year0)
+| Return the day-of-year for the given time, starting with 0.
+
+| [days](#days)
+| Produces an interval corresponding to the given number of calendar days.
+
+| [days_between](#days_between)
+| Returns the number of days between the first and second timestamp.
+
+| [div](#div)
+| Returns the division of two numbers.
+
+| [else](#else)
+| Return the `value` if it is non-`null`, `default` otherwise.
+
+| [eq](#eq)
+| Return `true` if `a` is equal to `b`.
+
+| [exp](#exp)
+| Returns `e^power`.
+
+| [extend](#extend)
+| Extends a record with fields from another.
+
+| [first](#first)
+| Computes the first value present across the input.
+
+| [floor](#floor)
+| Rounds the number down to the next smallest integer.
+
+| [gt](#gt)
+| Return `true` if `a` is greater than `b`.
+
+| [gte](#gte)
+| Return `true` if `a` is greater than or equal to `b`.
+
+| [hash](#hash)
+| Returns the hash of the `input`.
+
+| [hourly](#hourly)
+| A periodic function that produces a `true` value at the start of each hour.
+
+| [if](#if)
+| Return the `value` if `condition` is `true`, `null` otherwise.
+
+| [is_valid](#is_valid)
+| Returns `true` if `input` is non-`null`.
+
+| [json](#json)
+| Creates a JSON object from a string.
+
+| [lag](#lag)
+| Returns a lagging value of `e`.
+
+| [last](#last)
+| Computes the last value present across the input.
+
+| [len](#len)
+| Returns the length of the string `s`.
+
+| [logical_and](#logical_and)
+| Returns the logical conjunction (AND) of two booleans.
+
+| [logical_or](#logical_or)
+| Returns the logical disjunction (OR) of two booleans.
+
+| [lookup](#lookup)
+| Looks up the value for a foreign key.
+
+| [lower](#lower)
+| Converts the string to lower case.
+
+| [lt](#lt)
+| Return `true` if `a` is less than `b`.
+
+| [lte](#lte)
+| Return `true` if `a` is less than or equal to `b`.
+
+| [max](#max)
+| Computes the maximum of values across the input.
+
+| [mean](#mean)
+| Computes the arithmetic mean of values across the input.
+
+| [min](#min)
+| Computes the minimum of values across the input.
+
+| [minutely](#minutely)
+| A periodic function that produces a `true` value at the start of each minutely.
+
+| [month_of_year](#month_of_year)
+| Return the month-of-year for the given time, starting with 1.
+
+| [month_of_year0](#month_of_year0)
+| Return the month-of-year for the given time, starting with 0.
+
+| [monthly](#monthly)
+| A periodic function that produces a `true` value at the start of each calendar month (UTC).
+
+| [months](#months)
+| Produces an interval corresponding to the given number of calendar months.
+
+| [months_between](#months_between)
+| Returns the number of months between the first and second timestamp.
+
+| [mul](#mul)
+| Returns the product of two numbers.
+
+| [neg](#neg)
+| Returns the negation of `n`.
+
+| [neq](#neq)
+| Return `true` if `a` is not equal to `b`.
+
+| [not](#not)
+| Returns the logical negation of a boolean.
+
+| [null_if](#null_if)
+| Return the `value` if `condition` is `false`, `null` otherwise.
+
+| [powf](#powf)
+| Returns `base^power`.
+
+| [remove_fields](#remove_fields)
+| Remove fields from a record.
+
+| [round](#round)
+| Rounds the number to the nearest integer.
+
+| [seconds](#seconds)
+| Produces a duration corresponding to the given number of seconds.
+
+| [seconds_between](#seconds_between)
+| Returns the number of seconds between the first and second timestamp.
+
+| [select_fields](#select_fields)
+| Limits fields in a record to a given set.
+
+| [shift_by](#shift_by)
+| Produces the current `value` shifted forward by the given `delta`.
+
+| [shift_to](#shift_to)
+| Produces the current `value` shifted forward to the given `time`.
+
+| [shift_until](#shift_until)
+| Produces the `value` shifted forward to the time the `predicate` is true.
+
+| [since](#since)
+| Configures a windowed aggregation.
+
+| [sliding](#sliding)
+| Configures sliding windowed aggregations.
+
+| [sqrt](#sqrt)
+| Returns the square root of `a`.
+
+| [stddev](#stddev)
+| Computes the sample standard deviation of values across the input.
+
+| [sub](#sub)
+| Returns the difference of two numbers.
+
+| [substring](#substring)
+| Takes a substring of the input between start and end indices.
+
+| [sum](#sum)
+| Computes the sum of values across the input.
+
+| [time_of](#time_of)
+| Returns the timestamp of rows in `input`.
+
+| [upper](#upper)
+| Converts the string to upper case.
+
+| [variance](#variance)
+| Computes the sample variance of values across the input.
+
+| [when](#when)
+| Produces the current `value` when the `condition` evaluates to `true`.
+
+| [with_key](#with_key)
+| Changes the grouping of the input `value`.
+
+| [year](#year)
+| Return the year of the given timestamp.
+
+| [yearly](#yearly)
+| A periodic function that produces a `true` value at the start of each calendar year (UTC).
+
+| [zip_max](#zip_max)
+| Returns the maximum of two values.
+
+| [zip_min](#zip_min)
+| Returns the minimum of two values.
+|===

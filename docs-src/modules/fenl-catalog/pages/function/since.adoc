@@ -1,0 +1,114 @@
+= since
+
+<pre>since(condition: <a href="https://docs.kaskada.com/docs/data-model#scalars">bool</a>) -> window</pre>
+
+Configures a windowed aggregation.
+
+Configures aggregations to window since the last time the
+`condition` was `true`.
+
+### Parameters
+* condition: The condition used to determine when a new window is started.
+
+### Results
+Returns a window behavior that can be used with an [aggregation](#aggregation-functions)
+to configure windowed aggregations.
+
+**Tags:** [window](#window-functions)
+
+.Example: Hourly Count
+
+====Produces the count since the start of the hour.
+
+NOTE: The time and key are not available on the rows created by the ticks.
+The expression here uses `extend`, `time_of` and `first` to compute the `time` and `key` columns for all rows.
+
+= Query
+```
+{ n: Input.n, result: count(Input, window = since(hourly())) }
+# Compute time and key for all rows, even the ticks.
+| extend({ time: time_of($input), key: first(Input.key) })
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,n
+1996-12-19T16:00:57-00:00,Ben,2
+1996-12-19T16:00:58-00:00,Ryan,3
+1996-12-19T17:00:00-00:00,Ben,9
+1996-12-19T17:03:00-00:00,Ben,9
+1996-12-19T17:01:00-00:00,Ryan,8
+1996-12-19T18:01:00-00:00,Ben,1
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,n,result
+1996-12-19T16:00:57.000000000,Ben,2,1
+1996-12-19T16:00:58.000000000,Ryan,3,1
+1996-12-19T17:00:00.000000000,Ben,9,2
+1996-12-19T17:00:00.000000000,Ryan,,1
+1996-12-19T17:00:00.000000000,Ben,,2
+1996-12-19T17:01:00.000000000,Ryan,8,1
+1996-12-19T17:03:00.000000000,Ben,9,1
+1996-12-19T18:00:00.000000000,Ryan,,1
+1996-12-19T18:00:00.000000000,Ben,,1
+1996-12-19T18:01:00.000000000,Ben,1,1
+
+|===
+
+====
+
+
+.Example: Count Since Predicate
+
+===== Query
+```
+count(Input, window = since(Input.n > 5))
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,n
+1996-12-19T16:00:57-00:00,Ben,2
+1996-12-19T16:00:58-00:00,Ryan,3
+1996-12-19T17:00:00-00:00,Ben,9
+1996-12-19T17:03:00-00:00,Ben,9
+1996-12-19T17:01:00-00:00,Ryan,8
+1996-12-19T18:01:00-00:00,Ben,1
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,n,result
+1996-12-19T16:00:57.000000000,Ben,2,1
+1996-12-19T16:00:58.000000000,Ryan,3,1
+1996-12-19T17:00:00.000000000,Ben,9,2
+1996-12-19T17:01:00.000000000,Ryan,8,2
+1996-12-19T17:03:00.000000000,Ben,9,1
+1996-12-19T18:01:00.000000000,Ben,1,1
+
+|===
+
+====
+

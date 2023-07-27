@@ -1,0 +1,65 @@
+= Math Functions
+
+|===
+| Function | Summary
+
+| [add](#add)
+| Returns the sum of two numbers.
+
+| [ceil](#ceil)
+| Rounds the number up to the next largest integer.
+
+| [clamp](#clamp)
+| Returns `value` clamped between the bounds `min` and `max`.
+
+| [div](#div)
+| Returns the division of two numbers.
+
+| [exp](#exp)
+| Returns `e^power`.
+
+| [floor](#floor)
+| Rounds the number down to the next smallest integer.
+
+| [max](#max)
+| Computes the maximum of values across the input.
+
+| [mean](#mean)
+| Computes the arithmetic mean of values across the input.
+
+| [min](#min)
+| Computes the minimum of values across the input.
+
+| [mul](#mul)
+| Returns the product of two numbers.
+
+| [neg](#neg)
+| Returns the negation of `n`.
+
+| [powf](#powf)
+| Returns `base^power`.
+
+| [round](#round)
+| Rounds the number to the nearest integer.
+
+| [sqrt](#sqrt)
+| Returns the square root of `a`.
+
+| [stddev](#stddev)
+| Computes the sample standard deviation of values across the input.
+
+| [sub](#sub)
+| Returns the difference of two numbers.
+
+| [sum](#sum)
+| Computes the sum of values across the input.
+
+| [variance](#variance)
+| Computes the sample variance of values across the input.
+
+| [zip_max](#zip_max)
+| Returns the maximum of two values.
+
+| [zip_min](#zip_min)
+| Returns the minimum of two values.
+|===

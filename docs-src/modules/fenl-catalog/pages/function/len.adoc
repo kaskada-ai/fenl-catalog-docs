@@ -1,0 +1,58 @@
+= len
+
+<pre>len(s: <a href="https://docs.kaskada.com/docs/data-model#scalars">string</a>) -> i32</pre>
+
+Returns the length of the string `s`.
+
+### Parameters
+* s: The string to compute the length of.
+
+### Results
+Returns an `i32` column with each row containing the length of the
+string `s` in that row. Returns `0` for the empty string and `null`
+if `s` is `null`.
+
+**Tags:** [string](#string-functions)
+
+.Example: String Length
+
+===== Query
+```
+Input.value | len()
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,value
+2021-01-01T00:00:00.000000000Z,Ben,Hello World
+2021-01-02T00:00:00.000000000Z,Ryan,''
+2021-01-02T00:00:00.000000000Z,Ryan,Hi Earth
+2021-01-03T00:00:00.000000000Z,Ben,Hello
+2021-01-03T00:00:00.000000000Z,Ben,''
+2021-01-04T00:00:00.000000000Z,Ryan,hi
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,value,result
+2021-01-01T00:00:00.000000000,Ben,Hello World,11
+2021-01-02T00:00:00.000000000,Ryan,'',2
+2021-01-02T00:00:00.000000000,Ryan,Hi Earth,8
+2021-01-03T00:00:00.000000000,Ben,Hello,5
+2021-01-03T00:00:00.000000000,Ben,'',2
+2021-01-04T00:00:00.000000000,Ryan,hi,2
+
+|===
+
+====
+

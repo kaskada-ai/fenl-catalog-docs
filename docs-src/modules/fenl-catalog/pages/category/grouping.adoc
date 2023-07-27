@@ -1,0 +1,11 @@
+= Grouping Functions
+
+|===
+| Function | Summary
+
+| [lookup](#lookup)
+| Looks up the value for a foreign key.
+
+| [with_key](#with_key)
+| Changes the grouping of the input `value`.
+|===

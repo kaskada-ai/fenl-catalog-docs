@@ -1,0 +1,58 @@
+= day_of_month0
+
+<pre>day_of_month0(time: <a href="https://docs.kaskada.com/docs/data-model#scalars">timestamp_ns</a>) -> u32</pre>
+
+Return the day-of-month for the given time, starting with 0.
+
+### Parameters
+* time: The timestamp to return the day-of-month for.
+
+### Results
+Returns a `u32` column containing the day-of-month for each input `time`.
+Returns `null` for rows where `time` is `null`. The first day of the month is
+`0`. The result will be in the range 0 to 30 (inclusive).
+
+**Tags:** [time](#time-functions)
+
+.Example: Day of Month (Zero Based)
+
+===== Query
+```
+day_of_month0(Input.time)
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key
+1996-03-21T00:00:00-00:00,Ben
+1996-04-21T00:00:00-00:00,Ryan
+1996-05-21T00:00:00-00:00,Ryan
+1996-06-21T00:00:00-00:00,Ryan
+1996-07-21T00:00:00-00:00,Ben
+1996-08-21T00:00:00-00:00,Ben
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,result
+1996-03-21T00:00:00.000000000,Ben,20
+1996-04-21T00:00:00.000000000,Ryan,20
+1996-05-21T00:00:00.000000000,Ryan,20
+1996-06-21T00:00:00.000000000,Ryan,20
+1996-07-21T00:00:00.000000000,Ben,20
+1996-08-21T00:00:00.000000000,Ben,20
+
+|===
+
+====
+

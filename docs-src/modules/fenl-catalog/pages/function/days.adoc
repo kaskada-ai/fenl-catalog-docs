@@ -1,0 +1,62 @@
+= days
+
+<pre>days(days: <a href="https://docs.kaskada.com/docs/data-model#scalars">i64</a>) -> interval_days</pre>
+
+Produces an interval corresponding to the given number of calendar days.
+
+### Parameters
+* days: The number of days to create the interval for.
+
+### Results
+Returns an `interval_days` column with each row containing the
+value of `days` converted to an interval with the corresponding
+number of days. Rows where `days` is `null`, less than `0` or
+greater than `i32::MAX` will be `null`.
+
+**Tags:** [time](#time-functions)
+
+.Example: Adding a variable number of days
+
+====This example uses [`add_time`](#add-time) to add the created
+interval to the `time` column.
+
+= Query
+```
+Input.time | add_time(days(Input.n))
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,n
+1996-03-21T00:00:00-00:00,Ben,1
+1996-04-21T00:00:00-00:00,Ryan,2
+1996-05-21T00:00:00-00:00,Ryan,3
+1996-06-21T00:00:00-00:00,Ryan,
+1996-07-21T00:00:00-00:00,Ben,2
+1996-08-21T00:00:00-00:00,Ben,1
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,n,result
+1996-03-21T00:00:00.000000000,Ben,1,1996-03-22T00:00:00.000000000
+1996-04-21T00:00:00.000000000,Ryan,2,1996-04-23T00:00:00.000000000
+1996-05-21T00:00:00.000000000,Ryan,3,1996-05-24T00:00:00.000000000
+1996-06-21T00:00:00.000000000,Ryan,,
+1996-07-21T00:00:00.000000000,Ben,2,1996-07-23T00:00:00.000000000
+1996-08-21T00:00:00.000000000,Ben,1,1996-08-22T00:00:00.000000000
+
+|===
+
+====
+

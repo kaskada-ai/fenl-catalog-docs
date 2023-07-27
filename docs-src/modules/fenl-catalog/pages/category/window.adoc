@@ -1,0 +1,11 @@
+= Window Functions
+
+|===
+| Function | Summary
+
+| [since](#since)
+| Configures a windowed aggregation.
+
+| [sliding](#sliding)
+| Configures sliding windowed aggregations.
+|===

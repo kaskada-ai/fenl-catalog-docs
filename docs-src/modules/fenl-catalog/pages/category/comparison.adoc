@@ -1,0 +1,23 @@
+= Comparison Functions
+
+|===
+| Function | Summary
+
+| [eq](#eq)
+| Return `true` if `a` is equal to `b`.
+
+| [gt](#gt)
+| Return `true` if `a` is greater than `b`.
+
+| [gte](#gte)
+| Return `true` if `a` is greater than or equal to `b`.
+
+| [lt](#lt)
+| Return `true` if `a` is less than `b`.
+
+| [lte](#lte)
+| Return `true` if `a` is less than or equal to `b`.
+
+| [neq](#neq)
+| Return `true` if `a` is not equal to `b`.
+|===

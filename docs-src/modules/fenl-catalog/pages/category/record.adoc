@@ -1,0 +1,14 @@
+= Record Functions
+
+|===
+| Function | Summary
+
+| [extend](#extend)
+| Extends a record with fields from another.
+
+| [remove_fields](#remove_fields)
+| Remove fields from a record.
+
+| [select_fields](#select_fields)
+| Limits fields in a record to a given set.
+|===

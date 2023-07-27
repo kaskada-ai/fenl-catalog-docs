@@ -1,0 +1,20 @@
+= Tick Functions
+
+|===
+| Function | Summary
+
+| [daily](#daily)
+| A periodic function that produces a `true` value at the start of each calendar day (UTC).
+
+| [hourly](#hourly)
+| A periodic function that produces a `true` value at the start of each hour.
+
+| [minutely](#minutely)
+| A periodic function that produces a `true` value at the start of each minutely.
+
+| [monthly](#monthly)
+| A periodic function that produces a `true` value at the start of each calendar month (UTC).
+
+| [yearly](#yearly)
+| A periodic function that produces a `true` value at the start of each calendar year (UTC).
+|===

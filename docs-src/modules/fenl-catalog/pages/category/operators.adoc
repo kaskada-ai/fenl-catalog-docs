@@ -1,0 +1,47 @@
+## Operators
+
+|===
+| Function | Summary
+
+| [add](#add)
+| Returns the sum of two numbers.
+
+| [div](#div)
+| Returns the division of two numbers.
+
+| [eq](#eq)
+| Return `true` if `a` is equal to `b`.
+
+| [gt](#gt)
+| Return `true` if `a` is greater than `b`.
+
+| [gte](#gte)
+| Return `true` if `a` is greater than or equal to `b`.
+
+| [logical_and](#logical_and)
+| Returns the logical conjunction (AND) of two booleans.
+
+| [logical_or](#logical_or)
+| Returns the logical disjunction (OR) of two booleans.
+
+| [lt](#lt)
+| Return `true` if `a` is less than `b`.
+
+| [lte](#lte)
+| Return `true` if `a` is less than or equal to `b`.
+
+| [mul](#mul)
+| Returns the product of two numbers.
+
+| [neg](#neg)
+| Returns the negation of `n`.
+
+| [neq](#neq)
+| Return `true` if `a` is not equal to `b`.
+
+| [not](#not)
+| Returns the logical negation of a boolean.
+
+| [sub](#sub)
+| Returns the difference of two numbers.
+|===

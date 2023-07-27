@@ -1,0 +1,11 @@
+= Misc Functions
+
+|===
+| Function | Summary
+
+| [hash](#hash)
+| Returns the hash of the `input`.
+
+| [is_valid](#is_valid)
+| Returns `true` if `input` is non-`null`.
+|===

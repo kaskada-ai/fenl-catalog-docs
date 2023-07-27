@@ -1,0 +1,109 @@
+= clamp
+
+<pre>clamp(value: <a href="https://docs.kaskada.com/docs/data-model#type-constraints">number</a>, min: <a href="https://docs.kaskada.com/docs/data-model#type-constraints">number</a> = null, max: <a href="https://docs.kaskada.com/docs/data-model#type-constraints">number</a> = null) -> number</pre>
+
+Returns `value` clamped between the bounds `min` and `max`.
+
+### Parameters
+* `value`: The value to be clamped.
+* `min`: The minimum bound. If `null`, no minimum bound will be applied.
+* `max`: The maximum bound. If `null`, no maximum bound will be applied.
+
+Note: Since `min` and `max` have default values, they must be passed by name.
+The `value` is first so it is amenable to pipe. For example `value | clamp(min = 3)`
+or `value | clamp(max = 8)`.
+
+The arguments will be promoted to a compatible numeric type following
+the [numeric type coercion rules](docs:data-model#numeric-type-coercion-table).
+
+### Results
+Returns a numeric column of the promoted numeric type. For each row,
+it contains `value` if `value` is between `min` and `max`, `min` if
+`value` is less than `min`, `max` if `value` is greater than `max`, and
+`null` if `value` is `null` or `min > max`. If `min` or `max`
+are null than no clamping on that side will be performed.
+
+**Tags:** [math](#math-functions)
+
+.Example: Clamp With Min and Max
+
+====This example shows the use of `clamp` with both a `min` and
+`max` value provided.
+
+= Query
+```
+Input.a | clamp(min = 0.5, max = 9.5)
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,a
+2021-01-01T00:00:00.000000000Z,A,5.7
+2021-01-01T00:00:00.000000000Z,A,6.3
+2021-01-01T00:00:00.000000000Z,B,
+2021-01-01T00:00:00.000000000Z,A,
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,a,result
+2021-01-01T00:00:00.000000000,A,5.7,5.7
+2021-01-01T00:00:00.000000000,A,6.3,6.3
+2021-01-01T00:00:00.000000000,B,,
+2021-01-01T00:00:00.000000000,A,,
+
+|===
+
+====
+
+
+.Example: Clamp with Min
+
+====This example shows the use of clamp with just a minimum bound.
+
+= Query
+```
+Input.a | clamp(min = 0.5)
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,a
+2021-01-01T00:00:00.000000000Z,A,5.7
+2021-01-01T00:00:00.000000000Z,A,6.3
+2021-01-01T00:00:00.000000000Z,B,
+2021-01-01T00:00:00.000000000Z,A,
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,a,result
+2021-01-01T00:00:00.000000000,A,5.7,5.7
+2021-01-01T00:00:00.000000000,A,6.3,6.3
+2021-01-01T00:00:00.000000000,B,,
+2021-01-01T00:00:00.000000000,A,,
+
+|===
+
+====
+

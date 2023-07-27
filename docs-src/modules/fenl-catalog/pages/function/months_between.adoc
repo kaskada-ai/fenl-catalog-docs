@@ -1,0 +1,65 @@
+= months_between
+
+<pre>months_between(t1: <a href="https://docs.kaskada.com/docs/data-model#scalars">timestamp_ns</a>, t2: <a href="https://docs.kaskada.com/docs/data-model#scalars">timestamp_ns</a>) -> interval_months</pre>
+
+Returns the number of months between the first and second timestamp.
+
+### Parameters
+* t1: The first timestamp
+* t2: The second timestamp
+
+### Results
+Returns an `interval_months` column representing the number
+of calendar months between the two timestamps.
+
+In rows where `t1` or `t2` are `null`, the result will be `null`.
+If `t1` is before `t2`, the result will be positive. If `t1`
+is after `t2` the result will be negative.
+
+**Tags:** [time](#time-functions)
+
+.Example: Months Between
+
+====Note that the expression uses `as i32` to convert the `interval_months`
+to the integer number of months. This discards the units.
+
+= Query
+```
+months_between(Input.time, Input.date) as i32
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,date
+1996-03-21T00:00:00-00:00,Ben,1996-08-19T00:00:00-00:00
+1996-04-21T00:00:00-00:00,Ryan,1995-07-20T00:00:00-00:00
+1996-05-21T23:00:00-00:00,Ryan,1996-06-20T00:00:00-00:00
+1996-06-21T00:00:00-00:00,Ryan,1996-08-19T05:00:00-00:00
+1996-07-21T00:00:00-00:00,Ben,
+1996-08-21T00:00:00-00:00,Ben,1996-08-22T00:00:00-00:00
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,date,result
+1996-03-21T00:00:00.000000000,Ben,1996-08-19T00:00:00.000000000,5
+1996-04-21T00:00:00.000000000,Ryan,1995-07-20T00:00:00.000000000,-9
+1996-05-21T23:00:00.000000000,Ryan,1996-06-20T00:00:00.000000000,1
+1996-06-21T00:00:00.000000000,Ryan,1996-08-19T05:00:00.000000000,2
+1996-07-21T00:00:00.000000000,Ben,,
+1996-08-21T00:00:00.000000000,Ben,1996-08-22T00:00:00.000000000,0
+
+|===
+
+====
+

@@ -1,0 +1,65 @@
+= if
+
+<pre>if(condition: <a href="https://docs.kaskada.com/docs/data-model#scalars">bool</a>, value: <a href="https://docs.kaskada.com/docs/data-model#type-constraints">any</a>) -> any</pre>
+
+Return the `value` if `condition` is `true`, `null` otherwise.
+
+`if` "nulls out" the `value` if `condition` is `false`.
+It is equivalent to `null_if(!condition, value)`.
+
+See also [`null_if`](#null_if).
+
+### Parameters
+* condition: The condition which determines whether to return the `value` or `null`.
+* value: The value to return if `condition` is `true`.
+
+Note: The order of arguments is chosen to allow use with the pipe operation.
+Specifically, `value | if(condition)` may be used to conditionally "null-out"
+the value on the left-hand side.
+
+### Results
+For each row, return the `value` if `condition` is `true`.
+Returns `null` if the `condition` is `false` or `null`.
+
+**Tags:** [logical](#logical-functions)
+
+.Example
+
+===== Query
+```
+Input.value | if(Input.condition)
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,value,condition
+2021-01-01T00:00:00.000000000Z,A,57.8,false
+2021-01-02T00:00:00.000000000Z,B,58.7,true
+2021-01-03T00:00:00.000000000Z,A,,true
+2021-01-04T00:00:00.000000000Z,A,876,
+2021-01-05T00:00:00.000000000Z,A,786.0,
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,value,condition,result
+2021-01-01T00:00:00.000000000,A,57.8,false,
+2021-01-02T00:00:00.000000000,B,58.7,true,58.7
+2021-01-03T00:00:00.000000000,A,,true,
+2021-01-04T00:00:00.000000000,A,876.0,,
+2021-01-05T00:00:00.000000000,A,786.0,,
+
+|===
+
+====
+

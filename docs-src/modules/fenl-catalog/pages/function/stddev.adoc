@@ -1,0 +1,65 @@
+= stddev
+
+<pre>stddev(input: <a href="https://docs.kaskada.com/docs/data-model#type-constraints">number</a>, window: <a href="https://docs.kaskada.com/docs/data-model#type-constraints">window</a> = null) -> f64</pre>
+
+Computes the sample standard deviation of values across the input.
+
+Computes the sample standard deviation, which is the square root of the
+[sample variance](#variance).
+
+### Parameters
+* input: The input to compute the standard deviation of.
+* window: The window to aggregate within, as described in
+[Aggregation Functions](#aggregation-functions). If `null`, aggregates are across all
+rows for the current entity. If non-`null`, aggregates are within the specified window.
+See [window functions](#window-functions) for how to specify the aggregation window.
+
+### Results
+For each input row, return the mean of new, non-`null` rows in `input` up to and
+including the input row for the given entity. Returns `null` until there has been
+at least two such inputs.
+
+**Tags:** [aggregation](#aggregation-functions) [math](#math-functions)
+
+.Example: Standard Deviation
+
+===== Query
+```
+stddev(Input.value)
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,value
+2021-01-01T00:00:00.000000000Z,Ben,50.7
+2021-01-01T00:00:00.000000000Z,Ryan,
+2021-01-02T00:00:00.000000000Z,Ryan,67.2
+2021-01-03T00:00:00.000000000Z,Ben,1.2
+2021-01-04T00:00:00.000000000Z,Ben,
+2021-01-04T00:00:00.000000000Z,Ryan,2.3
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,value,result
+2021-01-01T00:00:00.000000000,Ben,50.7,
+2021-01-01T00:00:00.000000000,Ryan,,
+2021-01-02T00:00:00.000000000,Ryan,67.2,
+2021-01-03T00:00:00.000000000,Ben,1.2,24.750000000000004
+2021-01-04T00:00:00.000000000,Ben,,24.750000000000004
+2021-01-04T00:00:00.000000000,Ryan,2.3,32.45
+
+|===
+
+====
+

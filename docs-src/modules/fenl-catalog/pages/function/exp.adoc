@@ -1,0 +1,55 @@
+= exp
+
+<pre>exp(power: <a href="https://docs.kaskada.com/docs/data-model#scalars">f64</a>) -> f64</pre>
+
+Returns `e^power`.
+
+### Parameters
+* power: The power to raise `e` to.
+
+The exponential function applies to `f64` numbers only.
+Other numbers will be implicitly promoted.
+
+### Results
+Returns a column of `f64` values.
+Each row contains `null` if `power` is `null`.
+Otherwise, the row contains the value `e ^ power`.
+
+**Tags:** [math](#math-functions)
+
+.Example: Exponential
+
+===== Query
+```
+exp(Input.a)
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,a
+2021-01-01T00:00:00.000000000Z,A,5.7
+2021-01-02T00:00:00.000000000Z,A,6.3
+2021-01-02T00:00:00.000000000Z,B,
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,a,result
+2021-01-01T00:00:00.000000000,A,5.7,298.8674009670603
+2021-01-02T00:00:00.000000000,A,6.3,544.571910125929
+2021-01-02T00:00:00.000000000,B,,
+
+|===
+
+====
+

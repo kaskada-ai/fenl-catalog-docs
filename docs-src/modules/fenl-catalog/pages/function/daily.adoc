@@ -1,0 +1,113 @@
+= daily
+
+<pre>daily() -> bool</pre>
+
+A periodic function that produces a `true` value at the start of each calendar day (UTC).
+
+This function is often used in aggregations to produce windows or
+as a predicate column.
+
+### Results
+Returns a boolean column with each row containing a `true` value
+at the start of the day, corresponding to time 00:00:00Z, and
+`null` at all other times.
+
+**Tags:** [tick](#tick-functions)
+
+.Example: Daily Aggregated Window
+
+====In this example, the `daily()` function is used as an argument to
+the [`since](#since) window function. The result is a windowed
+aggregation that resets daily.
+
+= Query
+```
+{ n: Input.n, daily_sum: sum(Input.n, window = since(daily())) }
+| extend({time: time_of($input), key: first(Input.key) })
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,n
+1996-12-19T04:00:00-00:00,Ben,1
+1996-12-19T05:00:00-00:00,Ryan,2
+1996-12-20T01:00:00-00:00,Ben,3
+1996-12-20T22:00:00-00:00,Ben,4
+1996-12-21T03:00:00-00:00,Ryan,5
+1996-12-21T07:00:00-00:00,Ben,6
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,n,daily_sum
+1996-12-19T04:00:00.000000000,Ben,1,1
+1996-12-19T05:00:00.000000000,Ryan,2,2
+1996-12-20T00:00:00.000000000,Ryan,,2
+1996-12-20T00:00:00.000000000,Ben,,1
+1996-12-20T01:00:00.000000000,Ben,3,3
+1996-12-20T22:00:00.000000000,Ben,4,7
+1996-12-21T00:00:00.000000000,Ryan,,
+1996-12-21T00:00:00.000000000,Ben,,7
+1996-12-21T03:00:00.000000000,Ryan,5,5
+1996-12-21T07:00:00.000000000,Ben,6,6
+
+|===
+
+====
+
+
+.Example: Filter Daily
+
+====In this example, the `daily()` function is used as an argument to
+the [`when`](#when) function, which filters input.
+
+The output includes the last input row before a [`tick`](#tick) occurs.
+
+= Query
+```
+Input | last() | when(daily())
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,n
+1996-12-19T04:00:00-00:00,Ben,1
+1996-12-19T05:00:00-00:00,Ryan,2
+1996-12-20T01:00:00-00:00,Ben,3
+1996-12-20T22:00:00-00:00,Ben,4
+1996-12-21T03:00:00-00:00,Ryan,5
+1996-12-21T07:00:00-00:00,Ben,6
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,n
+1996-12-19T05:00:00.000000000,Ryan,2
+1996-12-19T04:00:00.000000000,Ben,1
+1996-12-19T05:00:00.000000000,Ryan,2
+1996-12-20T22:00:00.000000000,Ben,4
+
+|===
+
+====
+

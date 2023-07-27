@@ -1,0 +1,58 @@
+= powf
+
+<pre>powf(base: <a href="https://docs.kaskada.com/docs/data-model#scalars">f64</a>, power: <a href="https://docs.kaskada.com/docs/data-model#scalars">f64</a>) -> f64</pre>
+
+Returns `base^power`.
+
+### Parameters
+* base: The base to raise to the given power.
+* power: The power to raise the base to.
+
+The power function applies to `f64` numbers only.
+Other numbers will be implicitly promoted.
+
+###
+Returns a column of `f64` values.
+Each row contains `null` if `base` or `power` are `null`.
+Otherwise, the row contains the value `base ^ power`.
+
+**Tags:** [math](#math-functions)
+
+.Example: Power
+
+===== Query
+```
+powf(Input.a, Input.b)
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,a,b
+2021-01-01T00:00:00.000000000Z,A,5.7,1.2
+2021-01-01T00:00:00.000000000Z,A,6.3,0.4
+2021-01-02T00:00:00.000000000Z,B,,3.7
+2021-01-03T00:00:00.000000000Z,A,13.2,
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,a,b,result
+2021-01-01T00:00:00.000000000,A,5.7,1.2,8.073276500106656
+2021-01-01T00:00:00.000000000,A,6.3,0.4,2.0880275269924504
+2021-01-02T00:00:00.000000000,B,,3.7,
+2021-01-03T00:00:00.000000000,A,13.2,,
+
+|===
+
+====
+

@@ -1,0 +1,65 @@
+= Time Functions
+
+|===
+| Function | Summary
+
+| [add_time](#add_time)
+| Adds a `timedelta` (duration or interval) to a time.
+
+| [day_of_month](#day_of_month)
+| Return the day-of-month for the given time, starting with 1.
+
+| [day_of_month0](#day_of_month0)
+| Return the day-of-month for the given time, starting with 0.
+
+| [day_of_year](#day_of_year)
+| Return the day-of-year for the given time, starting with 1.
+
+| [day_of_year0](#day_of_year0)
+| Return the day-of-year for the given time, starting with 0.
+
+| [days](#days)
+| Produces an interval corresponding to the given number of calendar days.
+
+| [days_between](#days_between)
+| Returns the number of days between the first and second timestamp.
+
+| [lag](#lag)
+| Returns a lagging value of `e`.
+
+| [month_of_year](#month_of_year)
+| Return the month-of-year for the given time, starting with 1.
+
+| [month_of_year0](#month_of_year0)
+| Return the month-of-year for the given time, starting with 0.
+
+| [months](#months)
+| Produces an interval corresponding to the given number of calendar months.
+
+| [months_between](#months_between)
+| Returns the number of months between the first and second timestamp.
+
+| [seconds](#seconds)
+| Produces a duration corresponding to the given number of seconds.
+
+| [seconds_between](#seconds_between)
+| Returns the number of seconds between the first and second timestamp.
+
+| [shift_by](#shift_by)
+| Produces the current `value` shifted forward by the given `delta`.
+
+| [shift_to](#shift_to)
+| Produces the current `value` shifted forward to the given `time`.
+
+| [shift_until](#shift_until)
+| Produces the `value` shifted forward to the time the `predicate` is true.
+
+| [time_of](#time_of)
+| Returns the timestamp of rows in `input`.
+
+| [when](#when)
+| Produces the current `value` when the `condition` evaluates to `true`.
+
+| [year](#year)
+| Return the year of the given timestamp.
+|===

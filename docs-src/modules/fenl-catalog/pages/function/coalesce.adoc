@@ -1,0 +1,73 @@
+= coalesce
+
+<pre>coalesce(values+: <a href="https://docs.kaskada.com/docs/data-model#type-constraints">any</a>) -> any</pre>
+
+Return first non-`null` value or `null` if all values are `null`.
+
+### Parameters
+* values: One or more values to be coalesced.
+Note that all of the values must be promotable to the same type.
+
+### Results
+For each row, return the first non-`null` value from that row.
+If all values are `null`, then returns `null`.
+
+The type of the result is the minimum type that all of the `values`
+were [promotable](docs:data-model#type-promotion-rules) to.
+
+**Tags:** [logical](#logical-functions)
+
+.Example
+
+====In this example we use `coalesce` to apply multiple conditions, almost
+like a `switch` statement. Each case uses [`if`](#if) to only pass through
+the cases where the condition is met.
+
+One thing to be aware of when using `coalesce` like this is that the first
+non-`null` is taken. Which means that even if a condition is met, if the
+corresponding value was `null`, it would move on to other conditions.
+
+= Query
+```
+coalesce(
+    # Tax exempt items
+    Input.value | if(Input.tax_category == 'exempt'),
+    # Flat tax (1.0) items
+    Input.value + 1.0 | if(Input.tax_category == 'flat'),
+    # Normal tax (10%) items
+    Input.value * 1.1
+)
+
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,value,tax_category
+2020-01-01T00:00:00.000000000Z,Ben,10.00,exempt
+2020-01-02T00:00:00.000000000Z,Ben,12.00,
+2020-01-02T01:00:00.000000000Z,Ryan,13.00,flat
+2020-01-02T01:00:00.000000000Z,Ryan,,exempt
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,value,tax_category,result
+2020-01-01T00:00:00.000000000,Ben,10.0,exempt,10.0
+2020-01-02T00:00:00.000000000,Ben,12.0,,13.200000000000001
+2020-01-02T01:00:00.000000000,Ryan,13.0,flat,14.0
+2020-01-02T01:00:00.000000000,Ryan,,exempt,
+
+|===
+
+====
+

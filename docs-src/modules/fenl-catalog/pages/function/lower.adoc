@@ -1,0 +1,59 @@
+= lower
+
+<pre>lower(s: <a href="https://docs.kaskada.com/docs/data-model#scalars">string</a>) -> string</pre>
+
+Converts the string to lower case.
+
+### Parameters
+
+* s: The string to convert to lower case.
+
+### Results
+Returns a `string` column with each row containing the string `s`
+from that row converted to all lower case. The row contains `null`
+if `s` is `null` in that row.
+
+**Tags:** [string](#string-functions)
+
+.Example: Lower Case
+
+===== Query
+```
+Input.value | lower()
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,value
+2021-01-01T00:00:00.000000000Z,Ben,Hello World
+2021-01-02T00:00:00.000000000Z,Ryan,
+2021-01-02T00:00:00.000000000Z,Ryan,Hi Earth
+2021-01-03T00:00:00.000000000Z,Ben,Hello
+2021-01-03T00:00:00.000000000Z,Ben,
+2021-01-04T00:00:00.000000000Z,Ryan,hi
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,value,result
+2021-01-01T00:00:00.000000000,Ben,Hello World,hello world
+2021-01-02T00:00:00.000000000,Ryan,,
+2021-01-02T00:00:00.000000000,Ryan,Hi Earth,hi earth
+2021-01-03T00:00:00.000000000,Ben,Hello,hello
+2021-01-03T00:00:00.000000000,Ben,,
+2021-01-04T00:00:00.000000000,Ryan,hi,hi
+
+|===
+
+====
+

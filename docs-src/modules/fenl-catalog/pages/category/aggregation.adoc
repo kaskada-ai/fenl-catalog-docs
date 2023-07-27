@@ -1,0 +1,50 @@
+= Aggregation Functions
+Aggregation functions provide the mechanism for computing across rows.
+The result of an aggregation represents the aggregate result for each
+key up to and including the current row. This approximately corresponds to
+the result you would get if you ran a SQL aggregation over the values
+available at the time of that row.
+
+Aggregations may be configured to operate in a specific window by providing
+a [window function](#window-functions) as the optional `window` argument.
+If no window is provided, the aggregation is over all rows for the entity,
+up to and including the current time. If a window is provided, the result
+of an aggregation is the result for that entity in the current window up
+to and including the current time. The current window is often not yet
+complete.
+
+NOTE: All aggregations in Fenl are implicitly scoped to the entity key.
+This would be equivalent to performing a grouped aggregation in SQL.
+|===
+| Function | Summary
+
+| [count](#count)
+| Counts each new, non-`null` value in the input.
+
+| [count_if](#count_if)
+| Counts each `true` value across in input.
+
+| [first](#first)
+| Computes the first value present across the input.
+
+| [last](#last)
+| Computes the last value present across the input.
+
+| [max](#max)
+| Computes the maximum of values across the input.
+
+| [mean](#mean)
+| Computes the arithmetic mean of values across the input.
+
+| [min](#min)
+| Computes the minimum of values across the input.
+
+| [stddev](#stddev)
+| Computes the sample standard deviation of values across the input.
+
+| [sum](#sum)
+| Computes the sum of values across the input.
+
+| [variance](#variance)
+| Computes the sample variance of values across the input.
+|===

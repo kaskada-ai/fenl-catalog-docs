@@ -1,0 +1,64 @@
+= add
+
+<pre>add(a: <a href="https://docs.kaskada.com/docs/data-model#type-constraints">number</a>, b: <a href="https://docs.kaskada.com/docs/data-model#type-constraints">number</a>) -> number</pre>
+
+Returns the sum of two numbers.
+
+This is the function used for the binary operation `a + b`.
+
+### Parameters
+* a: The left-hand side of the addition.
+* b: The right-hand side of the addition.
+
+Note: Both `a` and `b` are promoted to a compatible numeric type
+following the [numeric type coercion rules](docs:data-model#numeric-type-coercion-table).
+
+### Results
+Returns a numeric column of the promoted numeric type compatible with both `a` and `b`.
+The result contains `null` if `a` or `b` was null at that row.
+Otherwise the row contains the sum of `a` and `b`.
+
+**Tags:** [math](#math-functions) [operator](#operators)
+
+.Example: Addition
+
+====In this example, `a` is an integer column (defaulting to `i64`) and `b`
+is a floating point column (defaulting to `f64`). The result is a floating
+point column, achieved by implicitly converting `a` to `f64`.
+
+= Query
+```
+Input.a + Input.b
+```
+
+= Table: Input
+
+* **Name**: `Input`
+* **Time Column**: `time`
+* **Group Column**: `key`
+* **Grouping**: `grouping`
+
+[%header,format=csv]
+|===
+time,key,a,b
+2021-01-01T00:00:00.000000000Z,A,5,1.2
+2021-01-02T00:00:00.000000000Z,A,6.3,0.4
+2021-03-01T00:00:00.000000000Z,B,,3.7
+2021-04-10T00:00:00.000000000Z,A,13,
+
+|===
+
+
+= Output CSV
+[header,format=csv]
+|===
+time,key,a,b,result
+2021-01-01T00:00:00.000000000,A,5.0,1.2,6.2
+2021-01-02T00:00:00.000000000,A,6.3,0.4,6.7
+2021-03-01T00:00:00.000000000,B,,3.7,
+2021-04-10T00:00:00.000000000,A,13.0,,
+
+|===
+
+====
+

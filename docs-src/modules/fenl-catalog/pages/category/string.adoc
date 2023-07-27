@@ -1,0 +1,20 @@
+= String Functions
+
+|===
+| Function | Summary
+
+| [json](#json)
+| Creates a JSON object from a string.
+
+| [len](#len)
+| Returns the length of the string `s`.
+
+| [lower](#lower)
+| Converts the string to lower case.
+
+| [substring](#substring)
+| Takes a substring of the input between start and end indices.
+
+| [upper](#upper)
+| Converts the string to upper case.
+|===
